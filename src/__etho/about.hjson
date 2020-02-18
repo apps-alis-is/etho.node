@@ -1,0 +1,9 @@
+{
+    "Description": '''
+Ether-1 node - system, master or gateway node based on configuration
+The ETHO App allows you to run a Service, Master or Gateway which is used to host content on ethoFS. (Node based on selected configuration).
+'''
+    Links: [
+        { website: "https://ether1.org/" }
+    ]
+}

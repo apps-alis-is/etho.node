@@ -1,0 +1,21 @@
+[Unit]
+Description={{{ID}}} service
+After=network.target
+
+[Service]
+User={{{USER}}}
+Group={{{USER}}}
+
+Type=simple
+Restart=always
+
+Environment="HOME={{{model.DATA_DIR}}}"
+
+ExecStart={{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --ethofs={{{configuration.NODE_TYPE}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}
+
+{{#model.SERVICE_CONFIGURATION__ARRAY}}
+{{{key}}}={{{value}}}
+{{/model.SERVICE_CONFIGURATION__ARRAY}}
+
+[Install]
+WantedBy=default.target
