@@ -52,3 +52,25 @@ Ether-1 Node AMI app - runs system, master or gateway node.
 
 Run ami with `-ll=trace` to enable trace level printout, e.g.:
 `ami --path=/mns/etho1 -ll=trace setup`
+
+#### Multi node setups
+
+ETHO nodes binds automatically to primary IP and is not possible to configure binding to specific IP right now. As such to achieve multi node setup you are required to run ETHO nodes isolated in `isolate package`
+
+You can do that configuration as follows:
+```hjson
+{
+    id: "etho1"
+    type: "isolated"
+    configuration: {
+        OUTBOUND_ADDR: "<IPv4 you want to use for your node>"
+    }
+    app: {
+        type: "etho.node",
+        configuration: {
+            NODE_TYPE: "sn" // mn, gn
+        }
+    }
+    user: "etho"
+}
+```
