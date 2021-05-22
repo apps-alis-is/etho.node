@@ -74,3 +74,5 @@ You can do that configuration as follows:
     user: "etho"
 }
 ```
+
+For details about `isolated` please refer to [ami.isolated](https://github.com/cryon-io/ami.isolated).
