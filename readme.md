@@ -76,3 +76,5 @@ You can do that configuration as follows:
 ```
 
 For details about `isolated` please refer to [ami.isolated](https://github.com/cryon-io/ami.isolated).
+
+*NOTE: You will notice warning about failure of `systemctl daemon-reload` in case you setup with `isolated` You can safely IGNORE this warning message. It does not affect node negatively in any way.*
