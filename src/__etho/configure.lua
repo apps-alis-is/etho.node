@@ -19,6 +19,8 @@ local _ok, _error = fs.safe_chown(DATA_PATH, _uid, _uid, {recurse = true})
 ami_assert(_ok, "Failed to chown " .. DATA_PATH .. " - " .. (_error or ""))
 
 log_info "Configuring ETHO FS..."
+local GETH_PATH = '"' .. path.combine("bin", "geth") .. '"'
+
 local _home = env.get_env("HOME")
 env.set_env("HOME", DATA_PATH)
 ami_assert(os.execute(GETH_PATH .. " --ethofs=" .. am.app.get_config("NODE_TYPE") .. " --ethofsInit"), "Failed to initialize ETHO FS")
