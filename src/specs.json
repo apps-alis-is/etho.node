@@ -1,6 +1,6 @@
 {
     "id": "etho.node" ,
-    "version" : "0.1.0",
+    "version" : "0.2.0",
     "dependencies": [
         { "id":"eth.base" },
         { "id":"etho.binaries"}
