@@ -15,8 +15,9 @@ Ether-1 Node AMI app - runs system, master or gateway node.
     "id": "etho1",
     "type": "etho.node",
     "configuration": {
-		// sn mn or gn
-        "NODE_TYPE" : "sn"
+        // sn mn or gn
+        "NODE_TYPE" : "sn",
+        "OUTBOUND_ADDR": "<ipv4>"
     },
     "user": "etho"
 }
@@ -53,29 +54,3 @@ Ether-1 Node AMI app - runs system, master or gateway node.
 
 Run ami with `-ll=trace` to enable trace level printout, e.g.:
 `ami --path=/mns/etho1 -ll=trace setup`
-
-#### Multi node setups
-
-ETHO nodes binds automatically to primary IP and is not possible to configure binding to specific IP right now. As such to achieve multi node setup you are required to run ETHO nodes isolated in `isolate package`
-
-You can do that configuration as follows:
-```hjson
-{
-    id: "etho1"
-    type: "isolated"
-    configuration: {
-        OUTBOUND_ADDR: "<IPv4 you want to use for your node>"
-    }
-    app: {
-        type: "etho.node",
-        configuration: {
-            NODE_TYPE: "sn" // mn, gn
-        }
-    }
-    user: "etho"
-}
-```
-
-For details about `isolated` please refer to [ami.isolated](https://github.com/cryon-io/ami.isolated).
-
-*NOTE: You will notice warning about failure of `systemctl daemon-reload` in case you setup with `isolated` You can safely IGNORE this warning message. It does not affect node negatively in any way.*
