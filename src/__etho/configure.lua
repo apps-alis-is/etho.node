@@ -42,7 +42,7 @@ if am.app.get_config("OUTBOUND_ADDR") ~= nil then
 	if _ok then 
 		_ok = os.execute("ip netns exec " .. _netnsId .. " " ..GETH_PATH .. " --ethofs=" .. am.app.get_config("NODE_TYPE") .. " --ethofsConfig")
 	end
-	os.execute("eli bin/netns-cli.lua --id=" .. am.app.get("id") .. " --remove")
+	os.execute("eli bin/netns-cli.lua --id=" .. _netnsId .. " --remove")
 	if not _ok then 
 		ami_error("Failed to initialize ETHO FS")
 	end
