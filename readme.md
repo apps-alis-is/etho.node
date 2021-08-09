@@ -15,7 +15,8 @@ Ether-1 Node AMI app - runs system, master or gateway node.
     "id": "etho1",
     "type": "etho.node",
     "configuration": {
-        "NODE_TYPE" : "sn", // mn, gn
+		// sn mn or gn
+        "NODE_TYPE" : "sn"
     },
     "user": "etho"
 }
