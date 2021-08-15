@@ -16,7 +16,9 @@ local _ok, _uid = fs.safe_getuid(_user)
 ami_assert(_ok, "Failed to get " .. _user .. "uid - " .. (_uid or ""))
 
 local _ok, _error = fs.safe_chown(DATA_PATH, _uid, _uid, {recurse = true})
-ami_assert(_ok, "Failed to chown " .. DATA_PATH .. " - " .. (_error or ""))
+if not _ok then
+	ami_error("Failed to chown " .. DATA_PATH .. " - " .. (_error or ""))
+end
 
 if am.app.get_config("OUTBOUND_ADDR") ~= nil then 
 	log_info"OUTBOUND_ADDR specified. Downloading netns-cli..."
