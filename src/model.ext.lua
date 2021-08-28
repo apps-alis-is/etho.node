@@ -8,12 +8,13 @@ end
 
 am.app.set_model(
     {
-        SERVICE_NAME = "etho-geth",
-        SERVICE_FILE = "__etho/assets/daemon.service",
         IPC_PATH = path.combine(_dataDir, ".ether1/geth.ipc"),
         CHAINDATA_DIR = path.combine(_dataDir, ".ether1/geth/chaindata/"),
         IS_GN = am.app.get_configuration("NODE_TYPE", ""):match("gn"),
-        IP_PATH = IP_PATH
+        IP_PATH = IP_PATH,
+        SERVICES = {
+            ["etho-geth"] = "__etho/assets/daemon.service"
+        }
     },
     { merge = true, overwrite = true }
 )
