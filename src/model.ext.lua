@@ -11,10 +11,11 @@ am.app.set_model(
         IPC_PATH = path.combine(_dataDir, ".ether1/geth.ipc"),
         CHAINDATA_DIR = path.combine(_dataDir, ".ether1/geth/chaindata/"),
         IS_GN = am.app.get_configuration("NODE_TYPE", ""):match("gn"),
-        IP_PATH = IP_PATH,
-        SERVICES = {
-            ["etho-geth"] = "__etho/assets/daemon.service"
-        }
+        IP_PATH = IP_PATH
     },
     { merge = true, overwrite = true }
 )
+
+am.app.set_model({
+    ["etho-geth"] = "__etho/assets/daemon.service"
+}, "SERVICES")
