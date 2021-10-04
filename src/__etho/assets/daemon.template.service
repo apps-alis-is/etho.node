@@ -20,9 +20,9 @@ ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns 
 {{/model.IS_GN}}
 					-p={{{configuration.OUTBOUND_ADDR}}}:30305:30305 \
 					-p={{{configuration.OUTBOUND_ADDR}}}:30305:30305/udp \
-					-p={{{configuration.OUTBOUND_ADDR}}}:4001:4001 --force 
+					-p={{{configuration.OUTBOUND_ADDR}}}:4001:4001 --force --localhost
 ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns su -m {{{USER}}} -c "{{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --ethofs={{{configuration.NODE_TYPE}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}"
-ExecStop=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
+ExecStopPost=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
 {{/configuration.OUTBOUND_ADDR}}
 {{^configuration.OUTBOUND_ADDR}}
 AmbientCapabilities=CAP_NET_BIND_SERVICE

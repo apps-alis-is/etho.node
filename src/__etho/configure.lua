@@ -23,12 +23,13 @@ end
 if am.app.get_config("OUTBOUND_ADDR") ~= nil then 
 	log_info"OUTBOUND_ADDR specified. Downloading netns-cli..."
 	local _tmpFile = os.tmpname()
-    local _ok, _error = net.safe_download_file("https://github.com/alis-is/netns-cli/releases/download/0.0.1/netns-cli.lua", _tmpFile, {followRedirects = true})
+    local _ok, _error = net.safe_download_file("https://github.com/alis-is/netns-cli/releases/download/0.0.4/netns-cli.lua", _tmpFile, {followRedirects = true})
     if not _ok then
         fs.remove(_tmpFile)
         ami_error("Failed to download: " .. tostring(_error))
     end
-	fs.move(_tmpFile, "bin/netns-cli.lua")
+	fs.copy_file(_tmpFile, "bin/netns-cli.lua")
+	fs.safe_remove(_tmpFile)
 	log_success"netns-cli downloaded"
 end
 
