@@ -1,3 +1,13 @@
+am.app.set_model(
+    {
+        DAEMON_URL = "https://github.com/Ether1Project/Ether1/releases/download/V1.6.0/etho-linux-1.6.0.tar.gz",
+        VERSIONS = {
+            geth = "1.6.0"
+        }
+    },
+    {merge = true, overwrite = true}
+)
+
 local _dataDir = path.combine(os.cwd(), "data")
 
 local _which = proc.exec("which ip", { stdout = "pipe" })
