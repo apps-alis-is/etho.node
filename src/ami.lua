@@ -55,7 +55,7 @@ return {
             summary = "Validates app configuration and platform support",
             action = function(_options, _, _, _cli)
                 if _options.help then
-                    show_cli_help(_cli)
+                    am.print_help(_cli)
                     return
                 end
                 -- //TODO: Validate platform
@@ -63,9 +63,9 @@ return {
                 ami_assert(fs.EFS, "etho node AMI requires extra api - eli.fs.extra", EXIT_MISSING_API)
 
                 ami_assert(type(am.app.get("id")) == 'string', "id not specified!" , EXIT_INVALID_CONFIGURATION)
-                ami_assert(type(am.app.get_config()) == 'table', "configuration not found in app.h/json!" , EXIT_INVALID_CONFIGURATION)
+                ami_assert(type(am.app.get_configuration()) == 'table', "configuration not found in app.h/json!" , EXIT_INVALID_CONFIGURATION)
                 ami_assert(type(am.app.get("user")) == 'string', "USER not specified!" , EXIT_INVALID_CONFIGURATION)
-                ami_assert(type(am.app.get_config("NODE_TYPE")) == 'string', "NODE_TYPE not specified!" , EXIT_INVALID_CONFIGURATION)
+                ami_assert(type(am.app.get_configuration("NODE_TYPE")) == 'string', "NODE_TYPE not specified!" , EXIT_INVALID_CONFIGURATION)
                 ami_assert(type(am.app.get_type()) == "table" or type(am.app.get_type()) == "string", "Invalid app type!" , EXIT_INVALID_CONFIGURATION)
                 log_success("Ether-1 node configuration validated.")
             end
@@ -92,7 +92,7 @@ return {
             description = "geth 'removedb' command",
             summary = "Removes geth database",
             action = "__eth/removedb.lua",
-            contextFailExitCode = EXIT_RM_DATA_ERRO
+            contextFailExitCode = EXIT_RM_DATA_ERROR
         },
         remove = {
             index = 7,
@@ -105,7 +105,6 @@ return {
                     am.app.remove_data()
                     log_success("Application data removed.")
                 end
-                return
             end
         },
     }
