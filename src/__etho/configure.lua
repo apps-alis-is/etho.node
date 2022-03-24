@@ -40,18 +40,19 @@ local _home = env.get_env("HOME")
 env.set_env("HOME", DATA_PATH)
 if am.app.get_configuration("OUTBOUND_ADDR") ~= nil then 
 	local _netnsId = am.app.get("id") .. "-netns"
+	--ethofsUser={{{configuration.USER_TOKEN}}} --ethofsWallet={{{configuration.WALLET_ADDRESS}}}
 	ami_assert(os.execute("eli bin/netns-cli.lua --force --id=" .. _netnsId .. " --outbound-addr=" .. am.app.get_configuration("OUTBOUND_ADDR")), "Failed to create netns!")
-	local _ok = os.execute("ip netns exec " .. _netnsId .. " " .. GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsInit")
+	local _ok = os.execute("ip netns exec " .. _netnsId .. " " .. GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsUser=" .. am.app.get_configuration("USER_TOKEN") .. " --ethofsWallet=" .. am.app.get_configuration("WALLET_ADDRESS") .. " --ethofsInit")
 	if _ok then 
-		_ok = os.execute("ip netns exec " .. _netnsId .. " " ..GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsConfig")
+		_ok = os.execute("ip netns exec " .. _netnsId .. " " ..GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsUser=" .. am.app.get_configuration("USER_TOKEN") .. " --ethofsWallet=" .. am.app.get_configuration("WALLET_ADDRESS") .. " --ethofsConfig")
 	end
 	os.execute("eli bin/netns-cli.lua --id=" .. _netnsId .. " --remove")
 	if not _ok then 
 		ami_error("Failed to initialize ETHO FS")
 	end
 else
-	ami_assert(os.execute(GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsInit"), "Failed to initialize ETHO FS")
-	ami_assert(os.execute(GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsConfig"), "Failed to configure ETHO FS")
+	ami_assert(os.execute(GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsUser=" .. am.app.get_configuration("USER_TOKEN") .. " --ethofsWallet=" .. am.app.get_configuration("WALLET_ADDRESS") .. " --ethofsInit"), "Failed to initialize ETHO FS")
+	ami_assert(os.execute(GETH_PATH .. " --ethofs=" .. am.app.get_configuration("NODE_TYPE") .. " --ethofsUser=" .. am.app.get_configuration("USER_TOKEN") .. " --ethofsWallet=" .. am.app.get_configuration("WALLET_ADDRESS") .. " --ethofsConfig"), "Failed to configure ETHO FS")
 end
 env.set_env("HOME", _home)
 

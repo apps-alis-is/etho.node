@@ -17,7 +17,9 @@ Ether-1 Node AMI app - runs system, master or gateway node.
     "configuration": {
         // sn mn or gn
         "NODE_TYPE" : "sn",
-        "OUTBOUND_ADDR": "<ipv4>"
+        "OUTBOUND_ADDR": "<ipv4>",
+        "USER_TOKEN": "<user token from dashboard>",
+        "WALLET_ADDRESS": "<wallet address used for node>"
     },
     "user": "etho"
 }

@@ -21,7 +21,7 @@ ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns 
 					-p={{{configuration.OUTBOUND_ADDR}}}:30305:30305 \
 					-p={{{configuration.OUTBOUND_ADDR}}}:30305:30305/udp \
 					-p={{{configuration.OUTBOUND_ADDR}}}:4001:4001 --force --localhost
-ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns runuser -u {{{USER}}} -m -- {{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --ethofs={{{configuration.NODE_TYPE}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}
+ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns runuser -u {{{USER}}} -m -- {{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --ethofs={{{configuration.NODE_TYPE}}} --ethofsUser={{{configuration.USER_TOKEN}}} --ethofsWallet={{{configuration.WALLET_ADDRESS}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}
 ExecStopPost=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
 {{/configuration.OUTBOUND_ADDR}}
 {{^configuration.OUTBOUND_ADDR}}
@@ -30,7 +30,7 @@ AmbientCapabilities=CAP_NET_BIND_SERVICE
 User={{{USER}}}
 Group={{{USER}}}
 
-ExecStart={{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --ethofs={{{configuration.NODE_TYPE}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}
+ExecStart={{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --ethofs={{{configuration.NODE_TYPE}}} --ethofsUser={{{configuration.USER_TOKEN}}} --ethofsWallet={{{configuration.WALLET_ADDRESS}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}
 {{/configuration.OUTBOUND_ADDR}}
 
 {{#model.SERVICE_CONFIGURATION__ARRAY}}
