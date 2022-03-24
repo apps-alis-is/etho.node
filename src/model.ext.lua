@@ -1,6 +1,6 @@
 am.app.set_model(
     {
-        DAEMON_URL = "https://github.com/Ether1Project/Ether1/releases/download/V2.0.0/etho-linux-2.0.0.tar.gz",
+        DAEMON_URL = "https://nodes.ethoprotocol.com/download/etho-linux-2.0.0.tar.gz",
         VERSIONS = {
             geth = "2.0.0"
         }
